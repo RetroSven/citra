@@ -57,6 +57,9 @@ bool SetGeometry(retro_system_av_info* cb);
 /// Tells LibRetro what input buttons are labelled on the 3DS.
 bool SetInputDescriptors(const retro_input_descriptor desc[]);
 
+/// Tells LibRetro about the memory map for the 3DS.
+bool SetMemoryMapDescriptors(retro_memory_map *mmaps);
+
 /// Returns the current status of a input.
 int16_t CheckInput(unsigned port, unsigned device, unsigned index, unsigned id);
 

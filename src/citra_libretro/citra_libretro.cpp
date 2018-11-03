@@ -485,6 +485,23 @@ bool retro_load_game(const struct retro_game_info* info) {
         return false;
     }
 
+    const uint64_t mainram = RETRO_MEMDESC_SYSTEM_RAM;
+
+    struct retro_memory_descriptor descs[] =
+    {
+       { mainram, Kernel::memory_regions[0].linear_heap_memory->data(), 0, 0x20000000,                                                                0, 0, Kernel::memory_regions[0].size,                        NULL },
+       { mainram, Kernel::memory_regions[1].linear_heap_memory->data(), 0, 0x20000000+Kernel::memory_regions[0].size,                                 0, 0, Kernel::memory_regions[1].size,                        NULL },
+       { mainram, Kernel::memory_regions[2].linear_heap_memory->data(), 0, 0x20000000+Kernel::memory_regions[0].size+Kernel::memory_regions[1].size,  0, 0, Kernel::memory_regions[2].size,                        NULL },
+    };
+
+    struct retro_memory_map mmaps =
+    {
+       descs,
+       sizeof(descs) / sizeof(descs[0])
+    };
+
+    LibRetro::SetMemoryMapDescriptors(&mmaps);
+
     return true;
 }
 

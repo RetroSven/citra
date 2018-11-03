@@ -60,6 +60,10 @@ bool SetInputDescriptors(const retro_input_descriptor desc[]) {
     return environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, (void*)desc);
 }
 
+bool SetMemoryMapDescriptors(retro_memory_map* mmaps) {
+    return environ_cb(RETRO_ENVIRONMENT_SET_MEMORY_MAPS, (void*)mmaps);
+}
+
 bool HasUpdatedConfig() {
     bool updated = false;
     return environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated;
